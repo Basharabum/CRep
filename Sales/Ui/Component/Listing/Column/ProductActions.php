@@ -28,13 +28,13 @@ class ProductActions extends \Magento\Ui\Component\Listing\Columns\Column
     {
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as & $item) {
-                if (isset($item['product_id'])) {
+                if (isset($item['entity_id'])) {
                     $item[$this->getData('name')] = [
                         'edit' => [
                             'href' => $this->_urlBuilder->getUrl(
                                 static::URL_PATH_EDIT,
                                 [
-                                    'product_id' => $item['product_id']
+                                    'entity_id' => $item['entity_id']
                                 ]
                             ),
                             'label' => __('Edit')
@@ -43,7 +43,7 @@ class ProductActions extends \Magento\Ui\Component\Listing\Columns\Column
                             'href' => $this->_urlBuilder->getUrl(
                                 static::URL_PATH_DELETE,
                                 [
-                                    'product_id' => $item['product_id']
+                                    'entity_id' => $item['entity_id']
                                 ]
                             ),
                             'label' => __('Delete'),

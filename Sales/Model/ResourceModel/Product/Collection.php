@@ -5,7 +5,7 @@ namespace CRep\Sales\Model\ResourceModel\Product;
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
    
-    protected $_idFieldName = 'product_id';
+    protected $_idFieldName = 'entity_id';
 
     protected $_eventPrefix = 'crep_sales_product_collection';
 
@@ -23,7 +23,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         return $countSelect;
     }
 
-    protected function _toOptionArray($valueField = 'product_id', $labelField = 'name', $additional = [])
+    protected function _toOptionArray($valueField = 'entity_id', $labelField = 'name', $additional = [])
     {
         return parent::_toOptionArray($valueField, $labelField, $additional);
     }

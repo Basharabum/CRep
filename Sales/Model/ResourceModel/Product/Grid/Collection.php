@@ -68,4 +68,10 @@ class Collection extends \CRep\Sales\Model\ResourceModel\Product\Collection impl
     {
         return $this;
     }
+
+     protected function _renderFiltersBefore() {
+        $joinTable = $this->getTable('sales_order_item');
+        $this->getSelect()->join($joinTable.' as item','main_table.entity_id = item.order_id', array('*'));
+    parent::_renderFiltersBefore();
+    }
 }
