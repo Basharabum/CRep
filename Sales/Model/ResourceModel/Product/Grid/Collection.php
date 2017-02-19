@@ -26,6 +26,9 @@ class Collection extends \CRep\Sales\Model\ResourceModel\Product\Collection impl
         $this->_eventObject = $eventObject;
         $this->_init($model, $resourceModel);
         $this->setMainTable($mainTable);
+        ini_set('display_errors',1);
+        $this->addFilterToMap('created_at','main_table.created_at');
+        $this->addFilterToMap('entity_id','main_table.entity_id');
     }
 
     public function getAggregations()
@@ -69,9 +72,14 @@ class Collection extends \CRep\Sales\Model\ResourceModel\Product\Collection impl
         return $this;
     }
 
-     protected function _renderFiltersBefore() {
-        $joinTable = $this->getTable('sales_order_item');
-        $this->getSelect()->join($joinTable.' as item','main_table.entity_id = item.order_id', array('*'));
+    protected function _renderFiltersBefore() {
+
+       $salesOrderItemTable = $this->getTable('sales_order_item');
+        $customerAddressEntityTable = $this->getTable('customer_address_entity');
+        $this->getSelect()
+        ->join($salesOrderItemTable.' as item','main_table.entity_id = item.order_id', array('sku','name'))
+        ->joinLeft($customerAddressEntityTable.' as address','main_table.customer_id = address.parent_id', array('street','city','country_id'));
+    
     parent::_renderFiltersBefore();
     }
 }

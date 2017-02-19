@@ -36,7 +36,7 @@ class Index extends \Magento\Backend\App\Action
     protected function _setPageData()
     {
         $resultPage = $this->getResultPage();
-        $resultPage->getConfig()->getTitle()->prepend((__('Products')));
+        $resultPage->getConfig()->getTitle()->prepend((__('Last Sales')));
         return $this;
     }
 }
