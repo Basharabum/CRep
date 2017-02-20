@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
     <menu>
-        <add id="CRep_Sales::helloworld" title="CRep" module="CRep_Sales" sortOrder="52" resource="CRep_Sales::helloworld"/>
-        <add id="CRep_Sales::product" title="Sales" module="CRep_Sales" sortOrder="10" action="crep_sales/product" resource="CRep_Sales::product" parent="CRep_Sales::helloworld"/>
+        <!--<add id="CRep_Sales::helloworld" title="CRep" module="CRep_Sales" sortOrder="52" resource="CRep_Sales::helloworld"/>
+        <add id="CRep_Sales::product" title="Sales" module="CRep_Sales" sortOrder="10" action="crep_sales/product" resource="CRep_Sales::product" parent="CRep_Sales::helloworld"/>-->
+        <add id="CRep_Sales::creports" title="Custom Reports" module="CRep_Sales" sortOrder="11" resource="CRep_Sales::creports" parent="Magento_Reports::report"/>
+       	<add id="CRep_Sales::lastsales" title="Last sales" module="CRep_Sales" sortOrder="21" action="crep_sales/product" resource="CRep_Sales::lastsales" parent="CRep_Sales::creports"/>
+       	<add id="CRep_Sales::lastsalesfull" title="Last sales (full info)" module="CRep_Sales" sortOrder="21" action="crep_sales/product/full" resource="CRep_Sales::lastsalesfull" parent="CRep_Sales::creports"/>
     </menu>
 </config>

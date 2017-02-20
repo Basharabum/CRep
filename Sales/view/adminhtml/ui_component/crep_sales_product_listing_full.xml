@@ -3,17 +3,17 @@
 <listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">crep_sales_product_listing.crep_sales_product_listing_data_source</item>
-            <item name="deps" xsi:type="string">crep_sales_product_listing.crep_sales_product_listing_data_source</item>
+            <item name="provider" xsi:type="string">crep_sales_product_listing_full.crep_sales_product_listing_full_data_source</item>
+            <item name="deps" xsi:type="string">crep_sales_product_listing_full.crep_sales_product_listing_full_data_source</item>
         </item>
         <item name="spinner" xsi:type="string">crep_sales_product_columns</item>
         <item name="buttons" xsi:type="array">
         </item>
     </argument>
-    <dataSource name="crep_sales_product_listing_data_source">
+    <dataSource name="crep_sales_product_listing_full_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
             <argument name="class" xsi:type="string">CRepSalesProductGridDataProvider</argument>
-            <argument name="name" xsi:type="string">crep_sales_product_listing_data_source</argument>
+            <argument name="name" xsi:type="string">crep_sales_product_listing_full_data_source</argument>
             <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
             <argument name="requestFieldName" xsi:type="string">entity_id</argument>
             <argument name="data" xsi:type="array">
@@ -28,7 +28,7 @@
             </item>
         </argument>
     </dataSource>
-    <container name="listing_top">
+    <container name="listing_full_top">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
                 <item name="template" xsi:type="string">ui/grid/toolbar</item>
@@ -39,7 +39,7 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="storageConfig" xsi:type="array">
-                        <item name="namespace" xsi:type="string">crep_sales_product_listing</item>
+                        <item name="namespace" xsi:type="string">crep_sales_product_listing_full</item>
                     </item>
                 </item>
             </argument>
@@ -48,7 +48,7 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="columnsData" xsi:type="array">
-                        <item name="provider" xsi:type="string">crep_sales_product_listing.crep_sales_product_listing.crep_sales_product_columns</item>
+                        <item name="provider" xsi:type="string">crep_sales_product_listing_full.crep_sales_product_listing_full.crep_sales_product_columns</item>
                     </item>
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/controls/columns</item>
                     <item name="displayArea" xsi:type="string">dataGridActions</item>
@@ -58,16 +58,16 @@
         <exportButton name="export_button">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="selectProvider" xsi:type="string">crep_sales_product_listing.crep_sales_product_listing.crep_sales_product_columns.ids</item>
+                    <item name="selectProvider" xsi:type="string">crep_sales_product_listing_full.crep_sales_product_listing_full.crep_sales_product_columns.ids</item>
                 </item>
             </argument>
         </exportButton>
-        <filters name="listing_filters">
+        <filters name="listing_full_filters">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="columnsProvider" xsi:type="string">crep_sales_product_listing.crep_sales_product_listing.crep_sales_product_columns</item>
+                    <item name="columnsProvider" xsi:type="string">crep_sales_product_listing_full.crep_sales_product_listing_full.crep_sales_product_columns</item>
                     <item name="storageConfig" xsi:type="array">
-                        <item name="provider" xsi:type="string">crep_sales_product_listing.crep_sales_product_listing.listing_top.bookmarks</item>
+                        <item name="provider" xsi:type="string">crep_sales_product_listing_full.crep_sales_product_listing_full.listing_full_top.bookmarks</item>
                         <item name="namespace" xsi:type="string">current.filters</item>
                     </item>
                     <item name="templates" xsi:type="array">
@@ -79,9 +79,9 @@
                         </item>
                     </item>
                     <item name="childDefaults" xsi:type="array">
-                        <item name="provider" xsi:type="string">crep_sales_product_listing.crep_sales_product_listing.listing_top.listing_filters</item>
+                        <item name="provider" xsi:type="string">crep_sales_product_listing_full.crep_sales_product_listing_full.listing_full_top.listing_full_filters</item>
                         <item name="imports" xsi:type="array">
-                            <item name="visible" xsi:type="string">crep_sales_product_listing.crep_sales_product_listing.crep_sales_product_columns.${ $.index }:visible</item>
+                            <item name="visible" xsi:type="string">crep_sales_product_listing_full.crep_sales_product_listing_full.crep_sales_product_columns.${ $.index }:visible</item>
                         </item>
                     </item>
                 </item>
@@ -90,10 +90,10 @@
                 </item>
             </argument>
         </filters>
-        <massaction name="listing_massaction">
+        <massaction name="listing_full_massaction">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="selectProvider" xsi:type="string">crep_sales_product_listing.crep_sales_product_listing.crep_sales_product_columns.ids</item>
+                    <item name="selectProvider" xsi:type="string">crep_sales_product_listing_full.crep_sales_product_listing_full.crep_sales_product_columns.ids</item>
                     <item name="indexField" xsi:type="string">product_id</item>
                 </item>
             </argument>
@@ -116,21 +116,21 @@
                         <item name="type" xsi:type="string">edit</item>
                         <item name="label" xsi:type="string" translate="true">Edit</item>
                         <item name="callback" xsi:type="array">
-                            <item name="provider" xsi:type="string">crep_sales_product_listing.crep_sales_product_listing.crep_sales_product_columns_editor</item>
+                            <item name="provider" xsi:type="string">crep_sales_product_listing_full.crep_sales_product_listing_full.crep_sales_product_columns_editor</item>
                             <item name="target" xsi:type="string">editSelected</item>
                         </item>
                     </item>
                 </argument>
             </action>
         </massaction>
-        <paging name="listing_paging">
+        <paging name="listing_full_paging">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="storageConfig" xsi:type="array">
-                        <item name="provider" xsi:type="string">crep_sales_product_listing.crep_sales_product_listing.listing_top.bookmarks</item>
+                        <item name="provider" xsi:type="string">crep_sales_product_listing_full.crep_sales_product_listing_full.listing_full_top.bookmarks</item>
                         <item name="namespace" xsi:type="string">current.paging</item>
                     </item>
-                    <item name="selectProvider" xsi:type="string">crep_sales_product_listing.crep_sales_product_listing.crep_sales_product_columns.ids</item>
+                    <item name="selectProvider" xsi:type="string">crep_sales_product_listing_full.crep_sales_product_listing_full.crep_sales_product_columns.ids</item>
                 </item>
             </argument>
         </paging>
@@ -139,11 +139,11 @@
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
                 <item name="storageConfig" xsi:type="array">
-                    <item name="provider" xsi:type="string">crep_sales_product_listing.crep_sales_product_listing.listing_top.bookmarks</item>
+                    <item name="provider" xsi:type="string">crep_sales_product_listing_full.crep_sales_product_listing_full.listing_full_top.bookmarks</item>
                     <item name="namespace" xsi:type="string">current</item>
                 </item>
                 <item name="editorConfig" xsi:type="array">
-                    <item name="selectProvider" xsi:type="string">crep_sales_product_listing.crep_sales_product_listing.crep_sales_product_columns.ids</item>
+                    <item name="selectProvider" xsi:type="string">crep_sales_product_listing_full.crep_sales_product_listing_full.crep_sales_product_columns.ids</item>
                     <item name="enabled" xsi:type="boolean">true</item>
                     <item name="indexField" xsi:type="string">product_id</item>
                     <item name="clientConfig" xsi:type="array">
@@ -153,7 +153,7 @@
                 </item>
                 <item name="childDefaults" xsi:type="array">
                     <item name="fieldAction" xsi:type="array">
-                        <item name="provider" xsi:type="string">crep_sales_product_listing.crep_sales_product_listing.crep_sales_product_columns_editor</item>
+                        <item name="provider" xsi:type="string">crep_sales_product_listing_full.crep_sales_product_listing_full.crep_sales_product_columns_editor</item>
                         <item name="target" xsi:type="string">startEdit</item>
                         <item name="params" xsi:type="array">
                             <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
@@ -161,7 +161,7 @@
                         </item>
                     </item>
                     <item name="storageConfig" xsi:type="array">
-                        <item name="provider" xsi:type="string">crep_sales_product_listing.crep_sales_product_listing.listing_top.bookmarks</item>
+                        <item name="provider" xsi:type="string">crep_sales_product_listing_full.crep_sales_product_listing_full.listing_full_top.bookmarks</item>
                         <item name="root" xsi:type="string">columns.${ $.index }</item>
                         <item name="namespace" xsi:type="string">current.${ $.storageConfig.root}</item>
                     </item>
@@ -200,11 +200,10 @@
                 </item>
             </argument>
         </column>
-        <column name="sku" class="CRep\Sales\Ui\Component\Listing\Column\Skulinks">
+        <column name="sku">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">text</item>
-                    <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
                     <item name="editor" xsi:type="array">
                         <item name="editorType" xsi:type="string">text</item>
                         <item name="validation" xsi:type="array">
@@ -276,6 +275,20 @@
                 </item>
             </argument>
         </column>
+        <column name="telephone">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                  <!--  <item name="filter" xsi:type="string">text</item>-->
+                    <item name="editor" xsi:type="array">
+                        <item name="editorType" xsi:type="string">text</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Phone</item>
+                </item>
+            </argument>
+        </column>
         <column name="street">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -301,6 +314,20 @@
                         </item>
                     </item>
                     <item name="label" xsi:type="string" translate="true">City</item>
+                </item>
+            </argument>
+        </column>
+        <column name="postcode">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <!--<item name="filter" xsi:type="string">text</item>-->
+                    <item name="editor" xsi:type="array">
+                        <item name="editorType" xsi:type="string">text</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Post code</item>
                 </item>
             </argument>
         </column>
@@ -360,30 +387,13 @@
                 </item>
             </argument>
         </column>
-        <!--<actionsColumn name="sku">
-            <argument name="data" xsi:type="array">
-            <item name="config" xsi:type="array">
-                <item name="filter" xsi:type="string">text</item>
-                <item name="indexField" xsi:type="string">entity_id</item>
-                <item name="viewUrlPath" xsi:type="string">crep_sales/product/full</item>
-                <item name="urlEntityParamName" xsi:type="string">uigrid_id</item>
-                <item name="editor" xsi:type="array">
-                    <item name="editorType" xsi:type="string">text</item>
-                    <item name="validation" xsi:type="array">
-                        <item name="required-entry" xsi:type="boolean">true</item>
-                    </item>
-                </item>
-                <item name="label" xsi:type="string" translate="true"> SKU</item>
-            </item>
-            </argument>
-        </actionsColumn>-->
     </columns>
     <container name="sticky">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
                 <item name="component" xsi:type="string">Magento_Ui/js/grid/sticky/sticky</item>
-                <item name="toolbarProvider" xsi:type="string">crep_sales_product_listing.crep_sales_product_listing.listing_top</item>
-                <item name="listingProvider" xsi:type="string">crep_sales_product_listing.crep_sales_product_listing.crep_sales_product_columns</item>
+                <item name="toolbarProvider" xsi:type="string">crep_sales_product_listing_full.crep_sales_product_listing_full.listing_full_top</item>
+                <item name="listing_fullProvider" xsi:type="string">crep_sales_product_listing_full.crep_sales_product_listing_full.crep_sales_product_columns</item>
             </item>
         </argument>
     </container>

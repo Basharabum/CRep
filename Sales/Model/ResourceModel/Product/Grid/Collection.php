@@ -78,7 +78,7 @@ class Collection extends \CRep\Sales\Model\ResourceModel\Product\Collection impl
         $customerAddressEntityTable = $this->getTable('customer_address_entity');
         $this->getSelect()
         ->join($salesOrderItemTable.' as item','main_table.entity_id = item.order_id', array('sku','name'))
-        ->joinLeft($customerAddressEntityTable.' as address','main_table.customer_id = address.parent_id', array('street','city','country_id'));
+        ->joinLeft($customerAddressEntityTable.' as address','main_table.customer_id = address.parent_id', array('street','city','country_id','postcode','telephone'));
     
     parent::_renderFiltersBefore();
     }

@@ -26,6 +26,7 @@
         <arguments>
             <argument name="collections" xsi:type="array">
                 <item name="crep_sales_product_listing_data_source" xsi:type="string">CRep\Sales\Model\ResourceModel\Product\Grid\Collection</item>
+                <item name="crep_sales_product_listing_full_data_source" xsi:type="string">CRep\Sales\Model\ResourceModel\Product\Grid\Collection</item>
             </argument>
         </arguments>
     </type>
