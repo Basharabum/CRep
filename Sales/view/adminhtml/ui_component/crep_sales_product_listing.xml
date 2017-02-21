@@ -177,15 +177,16 @@
                 </item>
             </argument>
         </selectionsColumn>
-        <column name="entity_id">
+        <!--<column name="entity_id">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">textRange</item>
                     <item name="sorting" xsi:type="string">asc</item>
+                    <item name="visible" xsi:type="boolean">false</item>
                     <item name="label" xsi:type="string" translate="true">Order Id</item>
                 </item>
             </argument>
-        </column>
+        </column>-->
         <column name="name">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -215,109 +216,6 @@
                 </item>
             </argument>
         </column>
-        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">dateRange</item>
-                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
-                    <item name="dataType" xsi:type="string">date</item>
-                    <item name="label" xsi:type="string" translate="true">Created</item>
-                </item>
-            </argument>
-        </column>
-        <column name="customer_id">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                   <!-- <item name="filter" xsi:type="string">text</item>-->
-                    <item name="sorting" xsi:type="string">asc</item>
-                    <item name="label" xsi:type="string" translate="true">Cust Id</item>
-                </item>
-            </argument>
-        </column>
-        <column name="customer_email">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                  <!--  <item name="filter" xsi:type="string">text</item>-->
-                    <item name="editor" xsi:type="array">
-                        <item name="editorType" xsi:type="string">text</item>
-                        <item name="validation" xsi:type="array">
-                            <item name="required-entry" xsi:type="boolean">true</item>
-                        </item>
-                    </item>
-                    <item name="label" xsi:type="string" translate="true">Customer's E-mail</item>
-                </item>
-            </argument>
-        </column>
-        <column name="customer_firstname">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                   <!--<item name="filter" xsi:type="string">text</item>-->
-                    <item name="editor" xsi:type="array">
-                        <item name="editorType" xsi:type="string">text</item>
-                        <item name="validation" xsi:type="array">
-                            <item name="required-entry" xsi:type="boolean">true</item>
-                        </item>
-                    </item>
-                    <item name="label" xsi:type="string" translate="true">Customer's First Name</item>
-                </item>
-            </argument>
-        </column>
-        <column name="customer_lastname">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">text</item>
-                    <item name="editor" xsi:type="array">
-                        <item name="editorType" xsi:type="string">text</item>
-                        <item name="validation" xsi:type="array">
-                            <item name="required-entry" xsi:type="boolean">true</item>
-                        </item>
-                    </item>
-                    <item name="label" xsi:type="string" translate="true">Customer's Last Name</item>
-                </item>
-            </argument>
-        </column>
-        <column name="street">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                  <!--  <item name="filter" xsi:type="string">text</item>-->
-                    <item name="editor" xsi:type="array">
-                        <item name="editorType" xsi:type="string">text</item>
-                        <item name="validation" xsi:type="array">
-                            <item name="required-entry" xsi:type="boolean">true</item>
-                        </item>
-                    </item>
-                    <item name="label" xsi:type="string" translate="true">Address</item>
-                </item>
-            </argument>
-        </column>
-        <column name="city">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">text</item>
-                    <item name="editor" xsi:type="array">
-                        <item name="editorType" xsi:type="string">text</item>
-                        <item name="validation" xsi:type="array">
-                            <item name="required-entry" xsi:type="boolean">true</item>
-                        </item>
-                    </item>
-                    <item name="label" xsi:type="string" translate="true">City</item>
-                </item>
-            </argument>
-        </column>
-        <column name="country_id">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">text</item>
-                    <item name="editor" xsi:type="array">
-                        <item name="editorType" xsi:type="string">text</item>
-                        <item name="validation" xsi:type="array">
-                            <item name="required-entry" xsi:type="boolean">true</item>
-                        </item>
-                    </item>
-                    <item name="label" xsi:type="string" translate="true">Country</item>
-                </item>
-            </argument>
-        </column>
          <column name="base_grand_total">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -328,7 +226,7 @@
                             <item name="required-entry" xsi:type="boolean">true</item>
                         </item>
                     </item>
-                    <item name="label" xsi:type="string" translate="true">Sum $</item>
+                    <item name="label" xsi:type="string" translate="true">Total Sum $</item>
                 </item>
             </argument>
         </column>
@@ -342,21 +240,7 @@
                             <item name="required-entry" xsi:type="boolean">true</item>
                         </item>
                     </item>
-                    <item name="label" xsi:type="string" translate="true"> Shipping</item>
-                </item>
-            </argument>
-        </column>
-        <column name="shipping_method">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">text</item>
-                    <item name="editor" xsi:type="array">
-                        <item name="editorType" xsi:type="string">text</item>
-                        <item name="validation" xsi:type="array">
-                            <item name="required-entry" xsi:type="boolean">true</item>
-                        </item>
-                    </item>
-                    <item name="label" xsi:type="string" translate="true"> method</item>
+                    <item name="label" xsi:type="string" translate="true">Total Shipping $</item>
                 </item>
             </argument>
         </column>

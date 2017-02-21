@@ -2,7 +2,7 @@
 
 namespace CRep\Sales\Model\ResourceModel\Product\Grid;
 
-class Collection extends \CRep\Sales\Model\ResourceModel\Product\Collection implements \Magento\Framework\Api\Search\SearchResultInterface
+class CollectionFull extends \CRep\Sales\Model\ResourceModel\Product\Collection implements \Magento\Framework\Api\Search\SearchResultInterface
 {
 
     protected $_aggregations;
@@ -87,11 +87,8 @@ class Collection extends \CRep\Sales\Model\ResourceModel\Product\Collection impl
         $salesOrderItemTable = $this->getTable('sales_order_item');
         $customerAddressEntityTable = $this->getTable('customer_address_entity');
         $this->getSelect()
-        ->columns('SUM(base_grand_total) as base_grand_total')
-        ->columns('SUM(base_shipping_amount) as base_shipping_amount')
         ->join($salesOrderItemTable.' as item','main_table.entity_id = item.order_id', array('sku','name'))
-        ->group('sku');
-        /*->joinLeft($customerAddressEntityTable.' as address','main_table.customer_id = address.parent_id', array('street','city','country_id','postcode','telephone'));*/
+        ->joinLeft($customerAddressEntityTable.' as address','main_table.customer_id = address.parent_id', array('street','city','country_id','postcode','telephone'));
     
     parent::_renderFiltersBefore();
     }

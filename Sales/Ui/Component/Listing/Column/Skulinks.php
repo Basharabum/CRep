@@ -1,12 +1,10 @@
 <?php
 namespace CRep\Sales\Ui\Component\Listing\Column;
 
-use Magento\Framework\Escaper;
 use Magento\Ui\Component\Listing\Columns\Column;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Framework\UrlInterface;
-use Magento\Sales\Model\ResourceModel\Order\Status\CollectionFactory;
 
 class Skulinks extends Column
 {
@@ -27,9 +25,10 @@ class Skulinks extends Column
   
     public function prepareDataSource(array $dataSource)
     {
-        $url = $this->_urlBuilder->getUrl('crep_sales/product/full');
+        //$url = $this->_urlBuilder->getUrl('crep_sales/product/full');
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as & $item) {
+                $url = $this->_urlBuilder->getUrl('crep_sales/product/full', array('sku'=>$item[$this->getData('name')]));
                 $item[$this->getData('name')] = "<a href='$url'>".$item[$this->getData('name')]."</a>";
             }
         }

@@ -22,11 +22,19 @@
             <argument name="resourceModel" xsi:type="string">CRep\Sales\Model\ResourceModel\Product</argument>
         </arguments>
     </type>
+    <type name="CRep\Sales\Model\ResourceModel\Product\Grid\CollectionFull">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">sales_order</argument>
+            <argument name="eventPrefix" xsi:type="string">crep_sales_product_grid_collectionfull</argument>
+            <argument name="eventObject" xsi:type="string">product_grid_collectionfull</argument>
+            <argument name="resourceModel" xsi:type="string">CRep\Sales\Model\ResourceModel\Product</argument>
+        </arguments>
+    </type>
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
                 <item name="crep_sales_product_listing_data_source" xsi:type="string">CRep\Sales\Model\ResourceModel\Product\Grid\Collection</item>
-                <item name="crep_sales_product_listing_full_data_source" xsi:type="string">CRep\Sales\Model\ResourceModel\Product\Grid\Collection</item>
+                <item name="crep_sales_product_listing_full_data_source" xsi:type="string">CRep\Sales\Model\ResourceModel\Product\Grid\CollectionFull</item>
             </argument>
         </arguments>
     </type>
