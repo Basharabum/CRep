@@ -7,6 +7,7 @@ class Collection extends \CRep\Sales\Model\ResourceModel\Product\Collection impl
 
     protected $_aggregations;
     protected $_request;
+    protected $_logger;
     public function __construct(
         \Magento\Framework\Data\Collection\EntityFactoryInterface $entityFactory,
         \Psr\Log\LoggerInterface $logger,
@@ -31,13 +32,22 @@ class Collection extends \CRep\Sales\Model\ResourceModel\Product\Collection impl
         ini_set('display_errors',1);
         $this->addFilterToMap('created_at','main_table.created_at');
         $this->addFilterToMap('entity_id','main_table.entity_id');
-        $sku = $this->_request->getParam('sku');
-        //var_dump($sku);
-        if ($sku != NULL) {
-           $this->addFieldToFilter('sku',$sku); 
-            //$this->addAttributeToFilter('sku',$sku);
-        }
-
+        
+        //$this->addFieldToSelect('entity_id');
+        //$this->addFieldToFilter('sku','MM620V2016'); //Фильтр по SKU
+        //$this->addFieldToFilter('created_at', array('gt' => date("Y-m-d H:i:s", strtotime('-30 day'))));
+        /*$params = $this->_request->getPost();
+        print_r($params);*/
+        /* $sku = $this->_request->getParam('sku');
+       
+         /*$this->clear();
+           $this->load();*/
+           /* $params = $this->getFilter();
+            print_r($params);*/
+            /*$params = $this->_request->getPost();
+            print_r($params);*/
+            
+            
     }
 
     public function getAggregations()
@@ -80,19 +90,37 @@ class Collection extends \CRep\Sales\Model\ResourceModel\Product\Collection impl
     {
         return $this;
     }
-
-    protected function _renderFiltersBefore() {
-        
-        
+  
+    protected function _renderFiltersBefore() 
+    {
         $salesOrderItemTable = $this->getTable('sales_order_item');
-        $customerAddressEntityTable = $this->getTable('customer_address_entity');
-        $this->getSelect()
-        ->columns('SUM(base_grand_total) as base_grand_total')
-        ->columns('SUM(base_shipping_amount) as base_shipping_amount')
-        ->join($salesOrderItemTable.' as item','main_table.entity_id = item.order_id', array('sku','name'))
-        ->group('sku');
-        /*->joinLeft($customerAddressEntityTable.' as address','main_table.customer_id = address.parent_id', array('street','city','country_id','postcode','telephone'));*/
-    
-    parent::_renderFiltersBefore();
+
+
+
+       /*$this->getSelect()
+
+                        ->columns('SUM(base_grand_total) as base_grand_total')
+                        ->columns('SUM(base_shipping_amount) as base_shipping_amount')
+                        ->columns('COUNT(*) as items_sold')
+                        ->columns('MIN(item.created_at) as created_at')
+                        ->join($salesOrderItemTable.' as item','main_table.entity_id = item.order_id', array('sku','name'))
+                        ->group('sku');*/
+
+/*->columns('SUM(base_grand_total) as base_grand_total')
+                        ->columns('SUM(base_shipping_amount) as base_shipping_amount')
+                        ->columns('COUNT(*) as items_sold')
+                        ->columns('MAX(main_table.created_at) as created_at')
+                        ->join($salesOrderItemTable.' as item','main_table.entity_id = item.order_id', array('sku','name'))
+                        ->group('sku');*/
+
+        $this->_logger->addDebug($this->getSelect()
+                        ->columns('SUM(main_table.base_grand_total) as base_grand_total')
+                        ->columns('SUM(main_table.base_shipping_amount) as base_shipping_amount')
+                        ->columns('COUNT(*) as items_sold')
+                        ->columns('MAX(item.created_at) as created_at')
+                        ->join($salesOrderItemTable.' as item','main_table.entity_id = item.order_id', array('sku','name'))
+                        ->group('sku'));
+
+        parent::_renderFiltersBefore();
     }
 }

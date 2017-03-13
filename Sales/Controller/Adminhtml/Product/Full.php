@@ -35,8 +35,10 @@ class Full extends \Magento\Backend\App\Action
    
     protected function _setPageData()
     {
+        /*$params = $this->getRequest()->getPost();
+        print_r($params);*/
         $resultPage = $this->getResultPage();
-        $resultPage->getConfig()->getTitle()->prepend((__('Full Last Sales')));
+        $resultPage->getConfig()->getTitle()->prepend((__('Detailed Last Sales')));
         return $this;
     }
 }

@@ -4,9 +4,9 @@ namespace CRep\Sales\Model\ResourceModel\Product\Grid;
 
 class CollectionFull extends \CRep\Sales\Model\ResourceModel\Product\Collection implements \Magento\Framework\Api\Search\SearchResultInterface
 {
-
     protected $_aggregations;
     protected $_request;
+    
     public function __construct(
         \Magento\Framework\Data\Collection\EntityFactoryInterface $entityFactory,
         \Psr\Log\LoggerInterface $logger,
@@ -22,22 +22,18 @@ class CollectionFull extends \CRep\Sales\Model\ResourceModel\Product\Collection 
         \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null
     )
     {
-        parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $connection, $resource);
+         parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $connection, $resource);
         $this->_eventPrefix = $eventPrefix;
         $this->_eventObject = $eventObject;
         $this->_init($model, $resourceModel);
         $this->setMainTable($mainTable);
         $this->_request = $request;
+      
         ini_set('display_errors',1);
         $this->addFilterToMap('created_at','main_table.created_at');
         $this->addFilterToMap('entity_id','main_table.entity_id');
-        $sku = $this->_request->getParam('sku');
-        //var_dump($sku);
-        if ($sku != NULL) {
-           $this->addFieldToFilter('sku',$sku); 
-            //$this->addAttributeToFilter('sku',$sku);
-        }
-
+        //$this->_logger->addDebug("Дата: ".$createdAt);
+        
     }
 
     public function getAggregations()
@@ -81,14 +77,64 @@ class CollectionFull extends \CRep\Sales\Model\ResourceModel\Product\Collection 
         return $this;
     }
 
-    protected function _renderFiltersBefore() {
-        
-        
+    protected function applyCustomFilter()
+    {
+        $createdAt = $this->_request->getParam('created_at');
+
+        if ($createdAt == null) {
+            
+            if (isset($_SERVER["HTTP_REFERER"])) {
+                $refer = $_SERVER["HTTP_REFERER"];
+                $keyStart = strpos($refer,'created_at');
+                if ($keyStart != FALSE) { 
+                    //фильтр по дате есть в реф. ссылке
+                    $valueStart = $keyStart + strlen('created_at') + 1;
+                    $valueEnd = strpos($refer, '/',$valueStart);
+                    
+                    if ($valueEnd == FALSE) { //фильтр по дате в конце ссылки
+                        $valueEnd = strlen($refer);
+                    }
+
+                    $createdAt = substr($refer, $valueStart, $valueEnd);
+                }
+                else {
+                    return; //фильтра по дате нет
+                }
+            }
+        }
+        $this->_logger->addDebug("Дата установлена: ".$createdAt);
+       
+        $dateFrom = substr($createdAt, 0, strpos($createdAt, '-'));
+        $dateFrom = str_replace('_', '/', $dateFrom);
+        $dateFrom = $dateFrom." 05:00:00";
+        $dateTo = substr($createdAt, strpos($createdAt, '-')+ 1);
+        $dateTo = str_replace('_', '/', $dateTo);
+        $dateTo = $dateTo." 04:59:59";
+           
+        if($dateFrom != '...') {
+        $this->addFieldToFilter('created_at', array('gteq' => date("Y-m-d H:i:s", strtotime($dateFrom))));
+        }
+        if($dateTo != '...') {
+        $this->addFieldToFilter('created_at', array('lteq' => date("Y-m-d H:i:s", strtotime($dateTo)))); 
+        }
+    }
+
+    protected function _renderFiltersBefore()
+    {
+        $this->applyCustomFilter();
         $salesOrderItemTable = $this->getTable('sales_order_item');
         $customerAddressEntityTable = $this->getTable('customer_address_entity');
-        $this->getSelect()
-        ->join($salesOrderItemTable.' as item','main_table.entity_id = item.order_id', array('sku','name'))
-        ->joinLeft($customerAddressEntityTable.' as address','main_table.customer_id = address.parent_id', array('street','city','country_id','postcode','telephone'));
+        
+        //$createdAt = $this->_request->getParam('created_at');
+        // $this->_logger->addDebug("В запрос: ".$createdAt);
+       // $this->_logger->addDebug(print_r($_SERVER, true));
+        $this->_logger->addDebug(
+            
+            $this->getSelect()
+                  ->join($salesOrderItemTable.' as item','main_table.entity_id = item.order_id', array('sku','name'))
+                  ->joinLeft($customerAddressEntityTable.' as address','main_table.customer_id = address.parent_id', array('street','city','country_id','postcode','telephone'))
+
+        );
     
     parent::_renderFiltersBefore();
     }

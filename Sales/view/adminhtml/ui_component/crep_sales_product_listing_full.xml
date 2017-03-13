@@ -31,7 +31,7 @@
             </item>
         </argument>
     </dataSource>
-    <container name="listing_full_top">
+    <container name="listing_top">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
                 <item name="template" xsi:type="string">ui/grid/toolbar</item>
@@ -390,6 +390,18 @@
                 </item>
             </argument>
         </column>
+        <!--<column name="shipping_method">
+        <argument name="data" xsi:type="array">
+        <item name="options" xsi:type="object">Magento\Payment\Ui\Component\Listing\Column\Method\Options</item>
+        <item name="config" xsi:type="array">
+            <item name="filter" xsi:type="string">select</item>
+            <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
+            <item name="visible" xsi:type="boolean">false</item>
+            <item name="dataType" xsi:type="string">select</item>
+            <item name="label" xsi:type="string" translate="true"> method</item>
+        </item>
+    </argument>
+    </column>-->
     </columns>
     <container name="sticky">
         <argument name="data" xsi:type="array">

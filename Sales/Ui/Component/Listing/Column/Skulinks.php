@@ -25,6 +25,7 @@ class Skulinks extends Column
   
     public function prepareDataSource(array $dataSource)
     {
+        //print_r($dataSource);
         //$url = $this->_urlBuilder->getUrl('crep_sales/product/full');
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as & $item) {
