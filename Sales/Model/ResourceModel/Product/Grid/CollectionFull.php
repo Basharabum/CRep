@@ -77,7 +77,8 @@ class CollectionFull extends \CRep\Sales\Model\ResourceModel\Product\Collection 
         return $this;
     }
 
-    protected function applyCustomFilter()
+    //Функция применяет фильтр по дате, переданный методом GET
+    protected function applyDateFilter()
     {
         $createdAt = $this->_request->getParam('created_at');
 
@@ -91,10 +92,11 @@ class CollectionFull extends \CRep\Sales\Model\ResourceModel\Product\Collection 
                     $valueStart = $keyStart + strlen('created_at') + 1;
                     $valueEnd = strpos($refer, '/',$valueStart);
                     
-                    if ($valueEnd == FALSE) { //фильтр по дате в конце ссылки
+                    if ($valueEnd == FALSE) { 
+                        //фильтр по дате в конце ссылки
                         $valueEnd = strlen($refer);
                     }
-
+                    
                     $createdAt = substr($refer, $valueStart, $valueEnd);
                 }
                 else {
@@ -102,14 +104,12 @@ class CollectionFull extends \CRep\Sales\Model\ResourceModel\Product\Collection 
                 }
             }
         }
-        $this->_logger->addDebug("Дата установлена: ".$createdAt);
        
         $dateFrom = substr($createdAt, 0, strpos($createdAt, '-'));
-        $dateFrom = str_replace('_', '/', $dateFrom);
-        $dateFrom = $dateFrom." 05:00:00";
-        $dateTo = substr($createdAt, strpos($createdAt, '-')+ 1);
-        $dateTo = str_replace('_', '/', $dateTo);
-        $dateTo = $dateTo." 04:59:59";
+        $dateFrom = str_replace('_', '/', $dateFrom)." 05:00:00";
+        
+        $dateTo = substr($createdAt, strpos($createdAt, '-') + 1);
+        $dateTo = str_replace('_', '/', $dateTo)." 04:59:59";
            
         if($dateFrom != '...') {
         $this->addFieldToFilter('created_at', array('gteq' => date("Y-m-d H:i:s", strtotime($dateFrom))));
@@ -121,21 +121,17 @@ class CollectionFull extends \CRep\Sales\Model\ResourceModel\Product\Collection 
 
     protected function _renderFiltersBefore()
     {
-        $this->applyCustomFilter();
+        $this->applyDateFilter();
         $salesOrderItemTable = $this->getTable('sales_order_item');
         $customerAddressEntityTable = $this->getTable('customer_address_entity');
-        
-        //$createdAt = $this->_request->getParam('created_at');
-        // $this->_logger->addDebug("В запрос: ".$createdAt);
-       // $this->_logger->addDebug(print_r($_SERVER, true));
-        $this->_logger->addDebug(
-            
+        $salesOrderPaymentTable = $this->getTable('sales_order_payment');
+     
+        //$this->_logger->addDebug(
             $this->getSelect()
-                  ->join($salesOrderItemTable.' as item','main_table.entity_id = item.order_id', array('sku','name'))
+                  ->join($salesOrderItemTable.' as item','main_table.entity_id = item.order_id', array('sku','name','price'))
                   ->joinLeft($customerAddressEntityTable.' as address','main_table.customer_id = address.parent_id', array('street','city','country_id','postcode','telephone'))
-
-        );
-    
-    parent::_renderFiltersBefore();
+                  ->joinLeft($salesOrderPaymentTable.' as payment','main_table.entity_id = payment.parent_id', array('method'));
+        //);
+        parent::_renderFiltersBefore();
     }
 }

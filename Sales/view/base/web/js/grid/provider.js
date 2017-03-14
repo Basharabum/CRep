@@ -100,19 +100,15 @@ define([
 
             return data;*/
             
-             var items = data.items;
+            var items = data.items;
             var totalSum = 0;
-            var totalShipping = 0;
+            
             _.each(items, function (record, index) {
             record._rowIndex = index;
-            totalSum += parseFloat(record.base_grand_total);
-            totalShipping += parseFloat(record.base_shipping_amount);
+            totalSum += parseFloat(record.item_price);
             });
             jQuery("#custom_total_value").text(totalSum);
-            jQuery("#custom_total_shipping_value").text(totalShipping);
-            
             return data;
-            
         },
 
         /**

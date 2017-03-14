@@ -32,6 +32,7 @@ class Collection extends \CRep\Sales\Model\ResourceModel\Product\Collection impl
         ini_set('display_errors',1);
         $this->addFilterToMap('created_at','main_table.created_at');
         $this->addFilterToMap('entity_id','main_table.entity_id');
+
         
         //$this->addFieldToSelect('entity_id');
         //$this->addFieldToFilter('sku','MM620V2016'); //Фильтр по SKU
@@ -95,30 +96,11 @@ class Collection extends \CRep\Sales\Model\ResourceModel\Product\Collection impl
     {
         $salesOrderItemTable = $this->getTable('sales_order_item');
 
-
-
-       /*$this->getSelect()
-
-                        ->columns('SUM(base_grand_total) as base_grand_total')
-                        ->columns('SUM(base_shipping_amount) as base_shipping_amount')
-                        ->columns('COUNT(*) as items_sold')
-                        ->columns('MIN(item.created_at) as created_at')
-                        ->join($salesOrderItemTable.' as item','main_table.entity_id = item.order_id', array('sku','name'))
-                        ->group('sku');*/
-
-/*->columns('SUM(base_grand_total) as base_grand_total')
-                        ->columns('SUM(base_shipping_amount) as base_shipping_amount')
-                        ->columns('COUNT(*) as items_sold')
-                        ->columns('MAX(main_table.created_at) as created_at')
-                        ->join($salesOrderItemTable.' as item','main_table.entity_id = item.order_id', array('sku','name'))
-                        ->group('sku');*/
-
         $this->_logger->addDebug($this->getSelect()
-                        ->columns('SUM(main_table.base_grand_total) as base_grand_total')
-                        ->columns('SUM(main_table.base_shipping_amount) as base_shipping_amount')
+                        ->columns('SUM(price) as item_price')
                         ->columns('COUNT(*) as items_sold')
                         ->columns('MAX(item.created_at) as created_at')
-                        ->join($salesOrderItemTable.' as item','main_table.entity_id = item.order_id', array('sku','name'))
+                        ->join($salesOrderItemTable.' as item','main_table.entity_id = item.order_id', array('sku','name','price'))
                         ->group('sku'));
 
         parent::_renderFiltersBefore();

@@ -2,9 +2,15 @@
 
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
     <update handle="styles"/>
+    <head>
+    	<css src="CRep_Sales::css/lastsales.css"/>
+    	<script src="CRep_Sales::js/gridLinkClick.js"/>
+    </head>
     <body>
         <referenceContainer name="content">
+        	<block class="Magento\Framework\View\Element\Template" template="CRep_Sales::backlink.phtml" />
             <uiComponent name="crep_sales_product_listing_full"/>
+            <block class="Magento\Framework\View\Element\Template" template="CRep_Sales::backlink.phtml" />
         </referenceContainer>
     </body>
 </page>

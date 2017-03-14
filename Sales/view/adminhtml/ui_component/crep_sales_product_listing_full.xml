@@ -93,39 +93,6 @@
                 </item>
             </argument>
         </filters>
-        <massaction name="listing_full_massaction">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="selectProvider" xsi:type="string">crep_sales_product_listing_full.crep_sales_product_listing_full.crep_sales_product_columns.ids</item>
-                    <item name="indexField" xsi:type="string">product_id</item>
-                </item>
-            </argument>
-            <action name="delete">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="type" xsi:type="string">delete</item>
-                        <item name="label" xsi:type="string" translate="true">Delete</item>
-                        <item name="url" xsi:type="url" path="crep_sales/product/massDelete"/>
-                        <item name="confirm" xsi:type="array">
-                            <item name="title" xsi:type="string" translate="true">Delete Products</item>
-                            <item name="message" xsi:type="string" translate="true">Are you sure you wan't to delete selected Products?</item>
-                        </item>
-                    </item>
-                </argument>
-            </action>
-            <action name="edit">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="type" xsi:type="string">edit</item>
-                        <item name="label" xsi:type="string" translate="true">Edit</item>
-                        <item name="callback" xsi:type="array">
-                            <item name="provider" xsi:type="string">crep_sales_product_listing_full.crep_sales_product_listing_full.crep_sales_product_columns_editor</item>
-                            <item name="target" xsi:type="string">editSelected</item>
-                        </item>
-                    </item>
-                </argument>
-            </action>
-        </massaction>
         <paging name="listing_full_paging">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -171,19 +138,11 @@
                 </item>
             </item>
         </argument>
-        <selectionsColumn name="ids">
+        <column name="entity_id" class="CRep\Sales\Ui\Component\Listing\Column\OrderLinks">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="resizeEnabled" xsi:type="boolean">false</item>
-                    <item name="resizeDefaultWidth" xsi:type="string">55</item>
-                    <item name="indexField" xsi:type="string">entity_id</item>
-                </item>
-            </argument>
-        </selectionsColumn>
-        <column name="entity_id">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">textRange</item>
+                    <!--<item name="filter" xsi:type="string">textRange</item>-->
+                    <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
                     <item name="sorting" xsi:type="string">asc</item>
                     <item name="label" xsi:type="string" translate="true">Order Id</item>
                 </item>
@@ -192,7 +151,7 @@
         <column name="name">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">text</item>
+                    <!--<item name="filter" xsi:type="string">text</item>-->
                     <item name="editor" xsi:type="array">
                         <item name="editorType" xsi:type="string">text</item>
                         <item name="validation" xsi:type="array">
@@ -206,7 +165,7 @@
         <column name="sku">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">text</item>
+                    <!--<item name="filter" xsi:type="string">text</item>-->
                     <item name="editor" xsi:type="array">
                         <item name="editorType" xsi:type="string">text</item>
                         <item name="validation" xsi:type="array">
@@ -220,17 +179,18 @@
         <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">dateRange</item>
+                    <!--<item name="filter" xsi:type="string">dateRange</item>-->
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
                     <item name="dataType" xsi:type="string">date</item>
                     <item name="label" xsi:type="string" translate="true">Created</item>
                 </item>
             </argument>
         </column>
-        <column name="customer_id">
+        <column name="customer_id" class="CRep\Sales\Ui\Component\Listing\Column\CustomerLinks">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                    <!-- <item name="filter" xsi:type="string">text</item>-->
+                   <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
                     <item name="sorting" xsi:type="string">asc</item>
                     <item name="label" xsi:type="string" translate="true">Cust Id</item>
                 </item>
@@ -334,7 +294,7 @@
                 </item>
             </argument>
         </column>
-        <column name="country_id">
+        <!--<column name="country_id">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">text</item>
@@ -347,11 +307,22 @@
                     <item name="label" xsi:type="string" translate="true">Country</item>
                 </item>
             </argument>
+        </column>-->
+        <column name="country_id">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Directory\Model\Config\Source\Country</item>
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="dataType" xsi:type="string">multiselect</item>
+                    <item name="sorting" xsi:type="string">asc</item>
+                    <item name="label" translate="true" xsi:type="string">Country</item>
+                </item>
+            </argument>
         </column>
-         <column name="base_grand_total">
+         <column name="price">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">textRange</item>
+                    <!--<item name="filter" xsi:type="string">textRange</item>-->
                     <item name="editor" xsi:type="array">
                         <item name="editorType" xsi:type="string">text</item>
                         <item name="validation" xsi:type="array">
@@ -362,46 +333,17 @@
                 </item>
             </argument>
         </column>
-        <column name="base_shipping_amount">
+        <column name="method">
             <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Payment\Ui\Component\Listing\Column\Method\Options</item>
                 <item name="config" xsi:type="array">
-                    <!--<item name="filter" xsi:type="string">text</item>-->
-                    <item name="editor" xsi:type="array">
-                        <item name="editorType" xsi:type="string">text</item>
-                        <item name="validation" xsi:type="array">
-                            <item name="required-entry" xsi:type="boolean">true</item>
-                        </item>
-                    </item>
-                    <item name="label" xsi:type="string" translate="true"> Shipping</item>
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true"> Payment method</item>
                 </item>
             </argument>
         </column>
-        <column name="shipping_method">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">text</item>
-                    <item name="editor" xsi:type="array">
-                        <item name="editorType" xsi:type="string">text</item>
-                        <item name="validation" xsi:type="array">
-                            <item name="required-entry" xsi:type="boolean">true</item>
-                        </item>
-                    </item>
-                    <item name="label" xsi:type="string" translate="true"> method</item>
-                </item>
-            </argument>
-        </column>
-        <!--<column name="shipping_method">
-        <argument name="data" xsi:type="array">
-        <item name="options" xsi:type="object">Magento\Payment\Ui\Component\Listing\Column\Method\Options</item>
-        <item name="config" xsi:type="array">
-            <item name="filter" xsi:type="string">select</item>
-            <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
-            <item name="visible" xsi:type="boolean">false</item>
-            <item name="dataType" xsi:type="string">select</item>
-            <item name="label" xsi:type="string" translate="true"> method</item>
-        </item>
-    </argument>
-    </column>-->
     </columns>
     <container name="sticky">
         <argument name="data" xsi:type="array">

@@ -3,8 +3,10 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
     <update handle="styles"/>
     <head>
+        <css src="CRep_Sales::css/lastsales.css"/>
     	<script src="CRep_Sales::js/urlupdater.js"/>
         <script src="CRep_Sales::js/gridupdater.js"/>
+        <script src="CRep_Sales::js/gridLinkClick.js"/>
 	</head>
     <body>
         <referenceContainer name="content">

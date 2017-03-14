@@ -6,7 +6,7 @@ use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Framework\UrlInterface;
 
-class Skulinks extends Column
+class SkuLinks extends Column
 {
     protected $_resource;
     protected $_scopeConfig;
