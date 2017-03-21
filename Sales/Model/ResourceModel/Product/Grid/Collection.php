@@ -31,23 +31,10 @@ class Collection extends \CRep\Sales\Model\ResourceModel\Product\Collection impl
         $this->_request = $request;
         ini_set('display_errors',1);
         $this->addFilterToMap('created_at','main_table.created_at');
-        $this->addFilterToMap('entity_id','main_table.entity_id');
+        $this->addFilterToMap('item_id','main_table.item_id');
 
         
-        //$this->addFieldToSelect('entity_id');
-        //$this->addFieldToFilter('sku','MM620V2016'); //Фильтр по SKU
-        //$this->addFieldToFilter('created_at', array('gt' => date("Y-m-d H:i:s", strtotime('-30 day'))));
-        /*$params = $this->_request->getPost();
-        print_r($params);*/
-        /* $sku = $this->_request->getParam('sku');
-       
-         /*$this->clear();
-           $this->load();*/
-           /* $params = $this->getFilter();
-            print_r($params);*/
-            /*$params = $this->_request->getPost();
-            print_r($params);*/
-            
+        
             
     }
 
@@ -91,17 +78,31 @@ class Collection extends \CRep\Sales\Model\ResourceModel\Product\Collection impl
     {
         return $this;
     }
-  
+    public function addCustomIndexes()
+    {
+        $this->getConnection()->addIndex(
+                    'sales_order_item', //table name
+                    'sku',    // index name
+                    [
+                        'sku',
+                        'name'  // filed or column name 
+                    ],
+                    \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_FULLTEXT //type of index
+                );
+    }
     protected function _renderFiltersBefore() 
     {
-        $salesOrderItemTable = $this->getTable('sales_order_item');
+        $this->addCustomIndexes();
+        //$salesOrderItemTable = $this->getTable('sales_order_item');
+        $salesOrderTable = $this->getTable('sales_order');
 
         $this->_logger->addDebug($this->getSelect()
                         ->columns('SUM(price) as item_price')
+                        ->columns('SUM(tax_amount) as item_tax')
                         ->columns('COUNT(*) as items_sold')
-                        ->columns('MAX(item.created_at) as created_at')
-                        ->join($salesOrderItemTable.' as item','main_table.entity_id = item.order_id', array('sku','name','price'))
+                        ->columns('MAX(created_at) as created_at')
                         ->group('sku'));
+
 
         parent::_renderFiltersBefore();
     }

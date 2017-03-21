@@ -128,7 +128,7 @@ class CollectionFull extends \CRep\Sales\Model\ResourceModel\Product\Collection 
      
         //$this->_logger->addDebug(
             $this->getSelect()
-                  ->join($salesOrderItemTable.' as item','main_table.entity_id = item.order_id', array('sku','name','price'))
+                  ->join($salesOrderItemTable.' as item','main_table.entity_id = item.order_id', array('sku','name','price','tax_amount','price_incl_tax','discount_amount','product_id','row_invoiced'))
                   ->joinLeft($customerAddressEntityTable.' as address','main_table.customer_id = address.parent_id', array('street','city','country_id','postcode','telephone'))
                   ->joinLeft($salesOrderPaymentTable.' as payment','main_table.entity_id = payment.parent_id', array('method'));
         //);

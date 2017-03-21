@@ -102,12 +102,15 @@ define([
             
             var items = data.items;
             var totalSum = 0;
-            
+            var taxSum = 0;
+
             _.each(items, function (record, index) {
             record._rowIndex = index;
             totalSum += parseFloat(record.item_price);
+            taxSum += parseFloat(record.item_tax);
             });
             jQuery("#custom_total_value").text(totalSum);
+            jQuery("#custom_tax_value").text(taxSum);
             return data;
         },
 

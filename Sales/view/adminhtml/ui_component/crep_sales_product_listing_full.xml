@@ -162,6 +162,20 @@
                 </item>
             </argument>
         </column>
+        <column name="row_invoiced">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <!--<item name="filter" xsi:type="string">textRange</item>-->
+                    <item name="editor" xsi:type="array">
+                        <item name="editorType" xsi:type="string">text</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Row Invoiced</item>
+                </item>
+            </argument>
+        </column>
         <column name="sku">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -173,6 +187,21 @@
                         </item>
                     </item>
                     <item name="label" xsi:type="string" translate="true"> SKU</item>
+                </item>
+            </argument>
+        </column>
+         <column name="product_id" class="CRep\Sales\Ui\Component\Listing\Column\ProductLinks">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <!--<item name="filter" xsi:type="string">textRange</item>-->
+                    <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
+                    <item name="editor" xsi:type="array">
+                        <item name="editorType" xsi:type="string">text</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Product Id</item>
                 </item>
             </argument>
         </column>
@@ -329,7 +358,35 @@
                             <item name="required-entry" xsi:type="boolean">true</item>
                         </item>
                     </item>
-                    <item name="label" xsi:type="string" translate="true">Sum $</item>
+                    <item name="label" xsi:type="string" translate="true">Subtotal $</item>
+                </item>
+            </argument>
+        </column>
+        <column name="price_incl_tax">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <!--<item name="filter" xsi:type="string">textRange</item>-->
+                    <item name="editor" xsi:type="array">
+                        <item name="editorType" xsi:type="string">text</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Subtotal Incl Tax $</item>
+                </item>
+            </argument>
+        </column>
+        <column name="discount_amount">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <!--<item name="filter" xsi:type="string">textRange</item>-->
+                    <item name="editor" xsi:type="array">
+                        <item name="editorType" xsi:type="string">text</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Discount $</item>
                 </item>
             </argument>
         </column>

@@ -16,7 +16,7 @@
     </virtualType>
     <type name="CRep\Sales\Model\ResourceModel\Product\Grid\Collection">
         <arguments>
-            <argument name="mainTable" xsi:type="string">sales_order</argument>
+            <argument name="mainTable" xsi:type="string">sales_order_item</argument>
             <argument name="eventPrefix" xsi:type="string">crep_sales_product_grid_collection</argument>
             <argument name="eventObject" xsi:type="string">product_grid_collection</argument>
             <argument name="resourceModel" xsi:type="string">CRep\Sales\Model\ResourceModel\Product</argument>

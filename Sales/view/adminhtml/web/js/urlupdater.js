@@ -25,7 +25,7 @@ require(['jquery'],function($){
 			 		jQuery(this).attr("href",resultUrl);
 		 		}
 	 		}
+
 	 });
-	
-	
+
 });

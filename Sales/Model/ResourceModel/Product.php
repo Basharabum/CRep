@@ -19,7 +19,7 @@ class Product extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
     protected function _construct()
     {
-        $this->_init('sales_order', 'entity_id');
+        $this->_init('sales_order_item', 'item_id');
     }
 
     public function getProductNameById($id)
@@ -27,8 +27,8 @@ class Product extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         $adapter = $this->getConnection();
         $select = $adapter->select()
             ->from($this->getMainTable(), 'name')
-            ->where('entity_id = :entity_id');
-        $binds = ['entity_id' => (int)$id];
+            ->where('item_id = :item_id');
+        $binds = ['item_id' => (int)$id];
         return $adapter->fetchOne($select, $binds);
     }
 

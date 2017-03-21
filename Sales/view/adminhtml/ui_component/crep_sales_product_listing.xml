@@ -55,7 +55,7 @@
                 </item>
             </argument>
         </component>
-        <!--<filterSearch name="fulltext">
+        <filterSearch name="fulltext">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/search/search</item>
@@ -68,7 +68,7 @@
                     </item>
                 </item>
             </argument>
-        </filterSearch>-->
+        </filterSearch>
         <exportButton name="export_button">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -103,55 +103,8 @@
                     <item name="column" xsi:type="string">column</item>
                 </item>
             </argument>
-            <filterRange name="created_at" class="Magento\Ui\Component\Listing\Columns\Date">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="templates" xsi:type="array">
-                            <item name="date" xsi:type="array">
-                                <item name="options" xsi:type="array">
-                                    <item name="dateFormat" xsi:type="string">dd/MM/y</item>
-                                </item>
-                                <item name="outputDateFormat" xsi:type="string">dd/MM/y</item>
-                                <item name="inputDateFormat" xsi:type="string">dd/MM/y</item>
-                            </item>
-                        </item>
-                    </item>
-                </argument>
-            </filterRange>
+            
         </filters>
-        <!--<massaction name="listing_massaction">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="selectProvider" xsi:type="string">crep_sales_product_listing.crep_sales_product_listing.crep_sales_product_columns.ids</item>
-                    <item name="indexField" xsi:type="string">product_id</item>
-                </item>
-            </argument>
-            <action name="delete">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="type" xsi:type="string">delete</item>
-                        <item name="label" xsi:type="string" translate="true">Delete</item>
-                        <item name="url" xsi:type="url" path="crep_sales/product/massDelete"/>
-                        <item name="confirm" xsi:type="array">
-                            <item name="title" xsi:type="string" translate="true">Delete Products</item>
-                            <item name="message" xsi:type="string" translate="true">Are you sure you wan't to delete selected Products?</item>
-                        </item>
-                    </item>
-                </argument>
-            </action>
-            <action name="edit">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="type" xsi:type="string">edit</item>
-                        <item name="label" xsi:type="string" translate="true">Edit</item>
-                        <item name="callback" xsi:type="array">
-                            <item name="provider" xsi:type="string">crep_sales_product_listing.crep_sales_product_listing.crep_sales_product_columns_editor</item>
-                            <item name="target" xsi:type="string">editSelected</item>
-                        </item>
-                    </item>
-                </argument>
-            </action>
-        </massaction>-->
         <paging name="listing_paging">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -250,7 +203,21 @@
                             <item name="required-entry" xsi:type="boolean">true</item>
                         </item>
                     </item>
-                    <item name="label" xsi:type="string" translate="true">Total Sum $</item>
+                    <item name="label" xsi:type="string" translate="true">Revenue $</item>
+                </item>
+            </argument>
+        </column>
+        <column name="item_tax">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                  <!--  <item name="filter" xsi:type="string">text</item>-->
+                    <item name="editor" xsi:type="array">
+                        <item name="editorType" xsi:type="string">text</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Tax</item>
                 </item>
             </argument>
         </column>
@@ -261,7 +228,6 @@
                     <item name="sortOrder" xsi:type="number">6</item>
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
                     <item name="dataType" xsi:type="string">date</item>
-                    
                     <item name="label" xsi:type="string" translate="true">Created</item>
                 </item>
             </argument>
